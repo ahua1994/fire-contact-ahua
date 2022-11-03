@@ -20,12 +20,14 @@ export const ContactContextProvider = ({ children }) => {
             gender: gender,
         });
         //does not run console.log, if you take away async + await it runs
-        console.log("Document written with ID: ", docRef);
+        console.log("Document written with ID: ", docRef.id);
     }
     const handleSubmit = async e => {
         e.preventDefault();
         console.log(name, number, address);
-        if (name.trim() === "" || number.trim() === "" || address.trim() === "") return;
+        if (name.trim() === "" || number.trim() === "" || address.trim() === "") {
+            return alert("Please Fill Out The Form");
+        }
         addUser();
         setName("");
         setNumber("");
