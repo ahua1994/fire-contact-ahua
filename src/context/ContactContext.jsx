@@ -1,26 +1,54 @@
+import { db } from "../firebase";
 import { createContext, useState } from "react";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 
-export default ContactContext = createContext();
+export const ContactContext = createContext();
 
 export const ContactContextProvider = ({ children }) => {
     const [name, setName] = useState("");
     const [number, setNumber] = useState("");
+    const [address, setAddress] = useState("");
     const [gender, setGender] = useState("");
-    const [updating, setUpdating] = useState(false);
+    const [edit, setEdit] = useState(false);
     const [contacts, setContacts] = useState([]);
+
+    async function addUser() {
+        const docRef = await addDoc(collection(db, "users"), {
+            name: name,
+            number: number,
+            address: address,
+            gender: gender,
+        });
+        //does not run console.log, if you take away async + await it runs
+        console.log("Document written with ID: ", docRef);
+    }
+    const handleSubmit = async e => {
+        e.preventDefault();
+        console.log(name, number, address);
+        if (name.trim() === "" || number.trim() === "" || address.trim() === "") return;
+        addUser();
+        setName("");
+        setNumber("");
+        setAddress("");
+        setGender("Other");
+    };
     return (
         <ContactContext.Provider
             value={{
                 name,
                 number,
                 gender,
-                updating,
+                edit,
                 contacts,
+                address,
                 setName,
                 setNumber,
                 setGender,
-                setUpdating,
+                setEdit,
                 setContacts,
+                setAddress,
+                addUser,
+                handleSubmit,
             }}
         >
             {children}
