@@ -1,6 +1,6 @@
 import { db } from "../firebase";
 import { createContext, useState } from "react";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 
 export const ContactContext = createContext();
 
@@ -19,12 +19,10 @@ export const ContactContextProvider = ({ children }) => {
             address: address,
             gender: gender,
         });
-        //does not run console.log, if you take away async + await it runs
         console.log("Document written with ID: ", docRef.id);
     }
-    const handleSubmit = async e => {
+    const handleSubmit = e => {
         e.preventDefault();
-        console.log(name, number, address);
         if (name.trim() === "" || number.trim() === "" || address.trim() === "") {
             return alert("Please Fill Out The Form");
         }
@@ -32,7 +30,7 @@ export const ContactContextProvider = ({ children }) => {
         setName("");
         setNumber("");
         setAddress("");
-        setGender("Other");
+        setGender("Male");
     };
     return (
         <ContactContext.Provider

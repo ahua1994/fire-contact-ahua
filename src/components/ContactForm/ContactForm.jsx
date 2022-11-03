@@ -37,9 +37,9 @@ const ContactForm = () => {
                     value={gender}
                     onChange={e => setGender(e.target.value)}
                 >
-                    <option value="Other">Other</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
+                    <option value="Male">Male ♂️</option>
+                    <option value="Female">Female ♀️</option>
+                    <option value="Other">Other 🏳️‍⚧️</option>
                 </Input>
                 <Button color="success" onClick={e => handleSubmit(e)}>
                     {edit ? "Update" : "Add"}
