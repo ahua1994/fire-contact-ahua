@@ -7,7 +7,15 @@
         height: 100vh;
         width: 100vw;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-evenly;
         align-items: center;  
     }
 } 
+@media screen and (max-width: 1180px){
+    .App{
+        main{
+            padding-top: 4rem;
+            flex-direction: column;
+        }
+    }
+}
