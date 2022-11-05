@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useEffect } from "react";
 import { Alert, Table } from "reactstrap";
 import { ContactContext } from "../../context/ContactContext";
@@ -40,14 +42,15 @@ const ContactTable = () => {
                                 <td
                                     style={{ color: "rgb(190,0,0)", cursor: "pointer" }}
                                     onClick={() => handleDelete(x.id)}
+                                    className="text-center"
                                 >
-                                    Delete
+                                    <FontAwesomeIcon icon={faTrashCan} />
                                 </td>
                                 <td
                                     style={{ color: "rgb(0,190,0)", cursor: "pointer" }}
                                     onClick={() => handleEdit(x)}
                                 >
-                                    Edit
+                                    <FontAwesomeIcon icon={faPenToSquare} />
                                 </td>
                             </tr>
                         ))}
