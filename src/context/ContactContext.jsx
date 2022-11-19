@@ -1,6 +1,7 @@
 import { db } from "../firebase";
 import { createContext, useState } from "react";
 import { addDoc, collection, getDocs, doc, setDoc, deleteDoc } from "firebase/firestore";
+import { onSnapshot } from "firebase/firestore";
 
 export const ContactContext = createContext();
 
@@ -15,8 +16,9 @@ export const ContactContextProvider = ({ children }) => {
     const [notice, setNotice] = useState(null);
 
     async function getUsers() {
-        const querySnapshot = await getDocs(collection(db, "users"));
-        setContacts(querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+        onSnapshot(collection(db, "users"), querySnapshot => {
+            setContacts(querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+        });
     }
 
     async function addUser() {
